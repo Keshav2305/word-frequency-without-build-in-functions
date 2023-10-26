@@ -9,7 +9,7 @@ struct HashEntry {
     string word;
     int frequency;
 
-    HashEntry(const std::string& w) : word(w), frequency(1) {}
+    HashEntry(const string& w) : word(w), frequency(1) {}
 };
 
 // Define a custom hash table class with basic operations.
@@ -31,7 +31,7 @@ class HashTable {
    HashTable(size_t tableSize) : size(tableSize), table(tableSize, HashEntry("")) {}
 
     // Custom insert operation.
-    void insert(const std::string& key) {
+    void insert(const string& key) {
         size_t index = customHash(key);
         for (size_t i = index; i < size; i++) {
             if (table[i].word == key) {
@@ -46,7 +46,7 @@ class HashTable {
     }
 
     // Custom search operation.
-    int search(const std::string& key) {
+    int search(const string& key) {
         size_t index = customHash(key);
         for (size_t i = index; i < size; i++) {
             if (table[i].word == key) {
@@ -64,21 +64,16 @@ int main() {
     // Input text (you can replace this with your own text).
     string text = "This is a simple word frequency counter. It counts the frequency of each word in a given input text. This is a simple example.";
 
-    // Tokenize the input text.
+    // Split the input text.
     string word;
     istringstream stream(text);
-    HashTable wordFrequency(100); // Adjust the table size as needed.
+    HashTable wordFrequency(100);//Example of 100 unit hash table
 
     while (stream >> word) {
-        // Remove any punctuation or special characters if needed.
-        // Here, we'll consider a word as-is, without special character removal.
-
         // Convert the word to lowercase (optional, for case-insensitive counting).
-        // To count words case-sensitive, remove the following line.
         for (char &c : word) {
             c = tolower(c);
         }
-
         // Update word frequency in the custom hash table.
         wordFrequency.insert(word);
     }
@@ -86,7 +81,7 @@ int main() {
     // Print word frequencies.
     for (size_t i = 0; i < wordFrequency.size; i++) {
     if (!wordFrequency.table[i].word.empty()) {
-        cout << wordFrequency.table[i].word << ": " << wordFrequency.table[i].frequency << std::endl;
+        cout << wordFrequency.table[i].word << ": " << wordFrequency.table[i].frequency << endl;
     }
 }
 
